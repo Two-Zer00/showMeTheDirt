@@ -1,0 +1,14 @@
+.vertical-align{
+    display: flex;
+    align-items: center;
+}
+.darkmode--activated p, .darkmode--activated h1, .darkmode--activated .alertMenu, .darkmode--activated .alertMenu span,.darkmode--activated label{
+    color: #fff;
+}
+.darkmode--activated .alertMenu {
+    background-color: rgba(252, 0, 0, 0);
+}
+
+.darkmode--activated .menu{
+    border: 5px solid white;
+}

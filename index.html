@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Me The Dirt</title
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+</head>
+<body>
+    <script>
+        var options = {
+            label: '🌓',
+        }
+        new Darkmode(options).showWidget();
+      </script>
+    <div class="position-absolute animate__animated" style="top:0; left: 50%; transform: translateX(-50%);" id="title">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-3 text-center user-select-none font-weight-bold text-uppercase ">show me the dirt</h1>
+            </div>
+            <div class="w-100"></div>
+            <div class="col">
+                <p class="text-center user-select-none text-muted m-0">Keep your screen clean</p>
+                <p class="text-center user-select-none text-muted m-0"> <a href="https://two-zer00.github.io/me/" class="text-muted text-decoration-none">TwoZer00</a> &copy; <span id="year"></span> <a href="" class="text-muted text-decoration-none">showMeTheDirt</a> v0.1</p>
+            </div>
+        </div>
+    </div>
+    <div class="container vertical-align user-select-none " style="height: 100vh; max-width: 600px;" id="menu">
+        <div class="shadow-sm p-3 mb-5 mx-auto text-dark menu">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-dark btn-block" onclick="fullScreen()">Set full screen</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                    <p class="text-center m-0">Now you can see the dirt on the screen, wipe it off.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="range" class="form-control-range" min="0.10" max="1" step="0.01" value="1" id="visibility"/>
+                        </div>
+                        <div class="col-2">
+                            <label for="visibility"><strong>Opacity</strong></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 text-center">
+                    <div class="form-check"> 
+                        <input type="checkbox" id="check" class="form-check-input"onchange="checkBtn(this)" id="check" title="you can also press the M key to hide the menu">
+                        <label for="check" class="form-check-label"><strong>Hide</strong></label>
+                    </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    <div class="container position-absolute user-select-none animate__animated" style="bottom:0; left: 50%; transform: translateX(-50%); visibility: hidden;" id="bottomMenu">
+        <div class="alert alert-light text-center alertMenu" role="alert">
+            Press the key <kbd>M</kbd> to reopen the menu.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <script>
+        document.getElementById("year").innerText = (new Date()).getFullYear();
+        var elem = document.documentElement;
+        var range = document.getElementById("visibility");
+        range.onchange = function(){
+            document.getElementById("menu").style.opacity=this.value;
+        }
+        var myVar = setInterval(myTimer, 10000);
+        function fullScreen(){
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+                hide(document.getElementById("menu"));
+                show(document.getElementById("bottomMenu"));
+                setTimeout(function(){
+                        document.getElementById("bottomMenu").classList.add("animate__fadeOut");
+                    },1000);
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+                hide(document.getElementById("menu"));
+                show(document.getElementById("bottomMenu"));
+                setTimeout(function(){
+                        document.getElementById("bottomMenu").classList.add("animate__fadeOut");
+                    },1000);
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                elem.webkitRequestFullscreen();
+                hide(document.getElementById("menu"));
+                show(document.getElementById("bottomMenu"));
+                setTimeout(function(){
+                        document.getElementById("bottomMenu").classList.add("animate__fadeOut");
+                    },1000);
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+                hide(document.getElementById("menu"));
+                show(document.getElementById("bottomMenu"));
+                setTimeout(function(){
+                        document.getElementById("bottomMenu").classList.add("animate__fadeOut");
+                    },1000);
+            }
+        }
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+                show(document.getElementById("menu"));
+                hide(document.getElementById("bottomMenu"));
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+                show(document.getElementById("menu"));
+                hide(document.getElementById("bottomMenu"));
+            } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                document.webkitExitFullscreen();
+                show(document.getElementById("menu"));
+                hide(document.getElementById("bottomMenu"));
+            } else if (document.msExitFullscreen) { /* IE/Edge */
+                document.msExitFullscreen();
+                show(document.getElementById("menu"));
+                hide(document.getElementById("bottomMenu"));
+            }
+        }
+        function checkBtn(value){
+            var check = value.checked;
+            console.log(check);
+            if(check && document.getElementById("menu").style.visibility==="hidden"){
+                show(document.getElementById("menu"));
+                show(document.getElementById("bottomMenu"));
+            }
+            else{
+                hide(document.getElementById("menu"));
+                show(document.getElementById("bottomMenu"));
+                setTimeout(function(){
+                    document.getElementById("bottomMenu").classList.add("animate__fadeOut");
+                },1000);
+            }
+        }
+        function show(elem){
+            elem.style.visibility = "visible";
+        }
+        function hide(elem){
+            elem.style.visibility = "hidden";
+        }
+        function myTimer() {
+            if(document.getElementById("title").classList.length==2){
+                document.getElementById("title").classList.add("animate__fadeOut");
+                setTimeout(function(){
+                    hide(document.getElementById("title"));
+                },2000);
+            }
+            else if(document.getElementById("title").classList[2]=="animate__fadeIn"){
+                document.getElementById("title").classList.remove("animate__fadeIn");
+                document.getElementById("title").classList.add("animate__fadeOut");
+                setTimeout(function(){
+                    hide(document.getElementById("title"));
+                },2000);
+            }
+            else if(document.getElementById("title").classList[2]=="animate__fadeOut"){
+                show(document.getElementById("title"));
+                document.getElementById("title").classList.remove("animate__fadeOut");
+                document.getElementById("title").classList.add("animate__fadeIn");
+                
+            }
+        }
+        function myStopFunction() {
+            clearInterval(myVar);
+        }
+        document.addEventListener("keypress",(e)=>{
+            if(e.code ==="KeyM"){
+                if(document.getElementById("menu").style.visibility==="hidden"){
+                    show(document.getElementById("menu"));
+                    document.getElementById("check").checked = false;
+                    hide(document.getElementById("bottomMenu"));
+                }
+                else{
+                    hide(document.getElementById("menu"));
+                    document.getElementById("check").checked = true;
+                    show(document.getElementById("bottomMenu"));
+                    setTimeout(function(){
+                        document.getElementById("bottomMenu").classList.add("animate__fadeOut");
+                    },1000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
